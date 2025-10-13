@@ -41,5 +41,17 @@
     "eslint-plugin-markdown": "^5.1.0",
     "eslint-plugin-react-hooks": "^6.1.1",
     "typescript-eslint": "^8.46.0"
+  },
+  "peerDependenciesMeta": {
+    "@eslint/compat": { "optional": true },
+    "@stylistic/eslint-plugin": { "optional": true },
+    "astro-eslint-parser": { "optional": true },
+    "eslint-plugin-astro": { "optional": true },
+    "eslint-plugin-import-x": { "optional": true },
+    "eslint-import-resolver-typescript": { "optional": true },
+    "eslint-plugin-jsonc": { "optional": true },
+    "eslint-plugin-markdown": { "optional": true },
+    "eslint-plugin-react-hooks": { "optional": true },
+    "typescript-eslint": { "optional": true }
   }
 }
