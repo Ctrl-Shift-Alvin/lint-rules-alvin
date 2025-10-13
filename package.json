@@ -1,0 +1,45 @@
+{
+  "name": "lint-rules-alvin",
+  "version": "1.0.0",
+  "description": "My own personal linting ruleset for a bunch of different plugins. Includes a few custom rules. Used in a few of my repos.",
+  "keywords": [
+    "eslint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "xxx"
+  },
+  "license": "MIT",
+  "author": "Alvin Raul Szőke",
+  "type": "module",
+  "exports": {
+    "./eslint": {
+      "import": "./eslint/presets/index.js",
+      "types": "./eslint/presets/index.d.ts"
+    },
+    "./eslint/configs": "./eslint/configs/index.js",
+    "./eslint/configs/astro": "./eslint/configs/astro.js",
+    "./eslint/configs/astro_ts": "./eslint/configs/astro_ts.js",
+    "./eslint/configs/base": "./eslint/configs/base.js",
+    "./eslint/configs/import_x": "./eslint/configs/import_x.js",
+    "./eslint/configs/import_x_ts": "./eslint/configs/import_x_ts.js",
+    "./eslint/configs/json": "./eslint/configs/json.js",
+    "./eslint/configs/markdown": "./eslint/configs/markdown.js",
+    "./eslint/configs/react_hooks": "./eslint/configs/react_hooks.js",
+    "./eslint/configs/stylistic": "./eslint/configs/stylistic.js",
+    "./eslint/configs/typescript": "./eslint/configs/typescript.js"
+  },
+  "peerDependencies": {
+    "@eslint/compat": "^1.4.0",
+    "@stylistic/eslint-plugin": "^5.4.0",
+    "astro-eslint-parser": "^1.2.2",
+    "eslint": "^9.37.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "eslint-plugin-import-x": "^4.16.1",
+		"eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-jsonc": "^2.21.0",
+    "eslint-plugin-markdown": "^5.1.0",
+    "eslint-plugin-react-hooks": "^6.1.1",
+    "typescript-eslint": "^8.46.0"
+  }
+}

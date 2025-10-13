@@ -1,0 +1,9 @@
+{
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit"
+	},
+	"eslint.codeAction.showDocumentation": {
+		"enable": true
+	},
+	"eslint.enable": true
+}
