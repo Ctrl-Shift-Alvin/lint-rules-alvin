@@ -1,6 +1,6 @@
 {
   "name": "lint-rules-alvin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "My own personal linting ruleset for a bunch of different plugins. Includes a few custom rules. Used in a few of my repos.",
   "keywords": [
     "eslint"
@@ -36,22 +36,42 @@
     "astro-eslint-parser": "^1.2.2",
     "eslint-plugin-astro": "^1.3.1",
     "eslint-plugin-import-x": "^4.16.1",
-		"eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-jsonc": "^2.21.0",
     "eslint-plugin-markdown": "^5.1.0",
     "eslint-plugin-react-hooks": "^6.1.1",
     "typescript-eslint": "^8.46.0"
   },
   "peerDependenciesMeta": {
-    "@eslint/compat": { "optional": true },
-    "@stylistic/eslint-plugin": { "optional": true },
-    "astro-eslint-parser": { "optional": true },
-    "eslint-plugin-astro": { "optional": true },
-    "eslint-plugin-import-x": { "optional": true },
-    "eslint-import-resolver-typescript": { "optional": true },
-    "eslint-plugin-jsonc": { "optional": true },
-    "eslint-plugin-markdown": { "optional": true },
-    "eslint-plugin-react-hooks": { "optional": true },
-    "typescript-eslint": { "optional": true }
+    "@eslint/compat": {
+      "optional": true
+    },
+    "@stylistic/eslint-plugin": {
+      "optional": true
+    },
+    "astro-eslint-parser": {
+      "optional": true
+    },
+    "eslint-plugin-astro": {
+      "optional": true
+    },
+    "eslint-plugin-import-x": {
+      "optional": true
+    },
+    "eslint-import-resolver-typescript": {
+      "optional": true
+    },
+    "eslint-plugin-jsonc": {
+      "optional": true
+    },
+    "eslint-plugin-markdown": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "typescript-eslint": {
+      "optional": true
+    }
   }
 }
