@@ -1,5 +1,7 @@
 # lint-rules-alvin
 
+See the [npm package](https://www.npmjs.com/package/lint-rules-alvin)!
+
 [My](https://github.com/Ctrl-Shift-Alvin) personal repo containing configs for code linters. Some of my public repos use this, so it's public. A generalized config makes managaing configs much easier (once they're working, of course).
 
 All dependencies are optional, but you need to install the correct ones depending on which files you use.
