@@ -1,8 +1,17 @@
 import eslintTs from 'typescript-eslint';
 
+/**
+ * @type {import('eslint').Linter.Config}
+ */
 export const typescript = {
 	name: 'typescript',
-	extends: [ eslintTs.configs.recommendedTypeChecked ],
+	files: [
+		'**/*.ts',
+		'**/*.tsx',
+		'**/*.mts',
+		'**/*.cts'
+	],
+	...eslintTs.configs.base,
 	languageOptions: { parserOptions: { projectService: true } },
 	rules: {
 		'@typescript-eslint/array-type': [
@@ -392,7 +401,104 @@ export const typescript = {
 		'@typescript-eslint/no-unnecessary-type-assertion': 'error',
 		'@typescript-eslint/no-unnecessary-type-constraint': 'error',
 		'@typescript-eslint/no-unnecessary-type-conversion': 'error',
-		'@typescript-eslint/no-unnecessary-type-parameters': 'error'
+		'@typescript-eslint/no-unnecessary-type-parameters': 'error',
+		'@typescript-eslint/no-unsafe-argument': 'warn',
+		'@typescript-eslint/no-unsafe-assignment': 'warn',
+		'@typescript-eslint/no-unsafe-call': 'warn',
+		'@typescript-eslint/no-unsafe-declaration-merging': 'errpr',
+		'@typescript-eslint/no-unsafe-enum-comparison': 'error',
+		'@typescript-eslint/no-unsafe-function-type': 'error',
+		'@typescript-eslint/no-unsafe-member-access': [
+			'warn',
+			{ allowOptionalChaining: false }
+		],
+		'@typescript-eslint/no-unsafe-return': 'error',
+		'@typescript-eslint/no-unsafe-type-assertion': 'warn',
+		'@typescript-eslint/no-unsafe-unary-minus': 'warn',
+		'@typescript-eslint/no-unused-expressions': 'warn',
+		'no-unused-vars': 'off',
+		'@typescript-eslint/no-unused-vars': 'warn',
+		'no-use-before-define': 'off',
+		'@typescript-eslint/no-use-before-define': 'error',
+		'no-useless-constructor': 'off',
+		'@typescript-eslint/no-useless-constructor': 'error',
+		'@typescript-eslint/no-useless-empty-export': 'error',
+		'@typescript-eslint/no-var-requires': 'off', // Deprecated in favor of 'no-require-imports'
+		'@typescript-eslint/no-wrapper-object-types': 'warn',
+		'@typescript-eslint/non-nullable-type-assertion-style': 'error',
+		'@typescript-eslint/only-throw-error': 'error',
+		'@typescript-eslint/parameter-properties': 'off',
+		'@typescript-eslint/prefer-as-const': 'error',
+		'@typescript-eslint/prefer-destructing': 'off',
+		'@typescript-eslint/prefer-enum-initializers': 'off',
+		'@typescript-eslint/prefer-find': 'error',
+		'@typescript-eslint/prefer-for-of': 'error',
+		'@typescript-eslint/prefer-function-type': 'error',
+		'@typescript-eslint/prefer-includes': 'error',
+		'@typescript-eslint/prefer-literal-enum-member': 'off',
+		'@typescript-eslint/prefer-namespace-keyword': 'error',
+		'@typescript-eslint/prefer-nullish-coalescing': 'error',
+		'@typescript-eslint/prefer-optional-chain': 'error',
+		'@typescript-eslint/prefer-promise-reject-errors': 'error',
+		'@typescript-eslint/prefer-readonly': 'error',
+		'@typescript-eslint/prefer-readonly-parameter-types': 'off',
+		'@typescript-eslint/prefer-reduce-type-parameter': 'error',
+		'@typescript-eslint/prefer-regexp-exec': 'error',
+		'@typescript-eslint/prefer-return-this-type': 'error',
+		'@typescript-eslint/prefer-string-starts-ends-with': 'error',
+		'@typescript-eslint/prefer-ts-expect-error': 'off', // Deprecated in favor of ban-ts-comment
+		'@typescript-eslint/promise-function-async': 'off',
+		'@typescript-eslint/related-getter-setter-pairs': 'error',
+		'@typescript-eslint/require-array-sort-compare': 'error',
+		'@typescript-eslint/require-await': 'warn',
+		'@typescript-eslint/restrict-plus-operands': 'error',
+		'@typescript-eslint/restrict-template-expressions': 'warn',
+		'@typescript-eslint/return-await': [
+			'error',
+			'always'
+		],
+		'@typescript-eslint/sort-type-constituents': 'off', // Deprecated in favor of sort-intersection-types, etc.
+		'@typescript-eslint/strict-boolean-expressions': 'off',
+		'@typescript-eslint/strict-boolean-expressions': [
+			'error',
+			{
+				allowAny: false,
+				allowNullableBoolean: false,
+				allowNullableEnum: false,
+				allowNullableNumber: true,
+				allowNullableObject: true,
+				allowNullableString: true,
+				allowNumber: false,
+				allowString: false
+
+				// allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false,
+			}
+		],
+		'@typescript-eslint/strict-boolean-expressions': [
+			'error',
+			{
+				allowDefaultCaseForExhaustiveSwitch: true,
+				considerDefaultExhaustiveForUnions: false,
+				requireDefaultForNonUnion: false
+			}
+		],
+		'@typescript-eslint/triple-slash-reference': [
+			'error',
+			{
+				lib: 'never',
+				path: 'never',
+				types: 'never'
+			}
+		],
+		'@typescript-eslint/unbound-method': 'error',
+		'@typescript-eslint/unified-signatures': [
+			'error',
+			{
+				ignoreDifferentlyNamedParameters: true,
+				ignoreOverloadsWithDifferentJSDoc: true
+			}
+		],
+		'@typescript-eslint/use-unknown-in-catch-callback-variable': 'off'
 
 	}
 };
