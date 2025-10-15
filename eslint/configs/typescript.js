@@ -474,7 +474,7 @@ export const typescript = {
 				// allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false,
 			}
 		],
-		'@typescript-eslint/strict-boolean-expressions': [
+		'@typescript-eslint/switch-exhaustiveness-check': [
 			'error',
 			{
 				allowDefaultCaseForExhaustiveSwitch: true,
