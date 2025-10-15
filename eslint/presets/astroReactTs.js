@@ -18,7 +18,7 @@ import {
  */
 export const astroReactTs = defineConfig(
 	base,
-	globalIgnores([ '**/*.astro/*.ts' ]),
+	globalIgnores([ '**/*.astro/*.ts' ]), // Crucial to drastically improve performance!
 	typescript,
 	astro,
 	{
