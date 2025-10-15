@@ -20,5 +20,18 @@ export const base = [
 	globalIgnores([
 		'eslint.config.js',
 		'eslint.config.ts'
-	])
+	]),
+	{
+		name: 'base/env',
+		languageOptions: {
+			ecmaVersion: 2020,
+			sourceType: 'module',
+			globals: {
+				...globals.browser,
+				...globals.nodeBuiltin,
+				...globals.serviceworker
+			}
+		}
+	},
+	eslintJs.configs.recommended
 ];

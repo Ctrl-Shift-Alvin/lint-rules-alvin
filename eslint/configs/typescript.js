@@ -16,8 +16,12 @@ export const typescript = {
 		'**/*.mts',
 		'**/*.cts'
 	],
-	...eslintTs.configs.base,
-	languageOptions: { parserOptions: { projectService: true } },
+	...eslintTs.configs['flat/base'],
+	languageOptions: {
+		parser: eslintTsParser,
+		parserOptions: { projectService: true },
+		sourceType: 'module'
+	},
 	rules: {
 		'@typescript-eslint/array-type': [
 			'error',
@@ -502,7 +506,10 @@ export const typescript = {
 				ignoreOverloadsWithDifferentJSDoc: true
 			}
 		],
-		'@typescript-eslint/use-unknown-in-catch-callback-variable': 'off'
+		'@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
+
+		// Other base ESLint overrides
+		'no-undef': 'off'
 
 	}
 };

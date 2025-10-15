@@ -17,8 +17,8 @@ import {
  * The `ESLint` Astro/React config with typescript.
  */
 export const astroReactTs = defineConfig(
-	base,
 	globalIgnores([ '**/*.astro/*.ts' ]), // Crucial to drastically improve performance!
+	base,
 	typescript,
 	astro,
 	{
