@@ -1,6 +1,6 @@
 {
   "name": "lint-rules-alvin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "My own personal linting ruleset for a bunch of different plugins. Includes a few custom rules. Used in a few of my repos.",
   "keywords": [
     "eslint"
