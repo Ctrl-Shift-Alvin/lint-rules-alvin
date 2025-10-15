@@ -6,6 +6,11 @@ import { maxChainPerLineRule } from '../custom_rules/max-chain-per-line.js';
 import { chainFirstOnNewlineRule } from '../custom_rules/chain-first-on-newline.js';
 import { multilineParenNewlineRule } from '../custom_rules/multiline-paren-newline.js';
 
+/**
+ * Provides a config that creates a plugin and configures custom rules.
+ *
+ * @type {import('eslint').Linter.Config}
+ */
 export const custom = {
 	plugins: {
 		custom: {

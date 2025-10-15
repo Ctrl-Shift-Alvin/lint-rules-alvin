@@ -1,6 +1,11 @@
-import eslintTs from 'typescript-eslint';
+import eslintTs from '@typescript-eslint/eslint-plugin';
+import eslintTsParser from '@typescript-eslint/parser';
 
 /**
+ * The ESLint `typescript` config. Extends `configs.base`,
+ * enables `languageOptions.parserOptions.projectService` and configures all rules,
+ * only for `ts`, `tsx`, `mts` and `cts` files.
+ *
  * @type {import('eslint').Linter.Config}
  */
 export const typescript = {
@@ -458,7 +463,6 @@ export const typescript = {
 			'always'
 		],
 		'@typescript-eslint/sort-type-constituents': 'off', // Deprecated in favor of sort-intersection-types, etc.
-		'@typescript-eslint/strict-boolean-expressions': 'off',
 		'@typescript-eslint/strict-boolean-expressions': [
 			'error',
 			{

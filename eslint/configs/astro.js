@@ -1,9 +1,9 @@
 import eslintPluginAstro from 'eslint-plugin-astro';
 
 /**
- * The `ESLint` Astro config.
+ * The ESLint Astro config. Extends `configs['flat/base']` and configures all rules.
  *
- * Extends `eslint-plugin-astro`'s `flat/base` config.
+ * @type {import('eslint').Linter.Config}
  */
 export const astro = [
 	...eslintPluginAstro.configs['flat/base'],

@@ -1,5 +1,10 @@
 import eslintPluginStylistic from '@stylistic/eslint-plugin';
 
+/**
+ * The ESLint `stylistic` config. Extends `configs.recommended` and overrides all rules.
+ *
+ * @type {import('eslint').Linter.Config}
+ */
 export const stylistic = {
 	name: 'eslint-plugin-stylistic',
 	...eslintPluginStylistic.configs.recommended,

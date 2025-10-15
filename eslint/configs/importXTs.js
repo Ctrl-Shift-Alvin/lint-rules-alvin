@@ -2,9 +2,11 @@ import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
 import { importX } from './index.js';
 
 /**
- * The `ESLint` import config with a TS resolver.
+ * The ESLint import config with a TS resolver.
+ * Extends `../importX` and `flatConfigs.typescript` config.
  *
- * Extends `eslint-plugin-import-x`'s `typescript` flat config.
+ * @type {import('eslint').Linter.Config}
+ *
  */
 export const importXTs = {
 	...importX,

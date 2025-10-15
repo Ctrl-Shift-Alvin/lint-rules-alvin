@@ -1,7 +1,9 @@
 import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
 
 /**
- * The `ESLint` import config.
+ * The ESLint import config. Configures all rules.
+ *
+ * @type {import('eslint').Linter.Config}
  */
 export const importX = {
 	name: 'eslint-plugin-import-x',
