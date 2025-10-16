@@ -33,7 +33,8 @@ export const astroReactTs = defineConfig(
 		files: [ '**/*.astro' ],
 		rules: {
 			'@stylistic/jsx-one-expression-per-line': 'off',
-			'@stylistic/jsx-curly-brace-presence': 'off'
+			'@stylistic/jsx-curly-brace-presence': 'off',
+			'import-x/unambiguous': 'off'
 		}
 	}
 );
