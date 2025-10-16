@@ -86,13 +86,12 @@ export const jsxMultilinePropNewlineRule = {
 						fix(fixer) {
 
 							// Get indentation of the line with the opening tag.
-							const line = sourceCode
-								.getLines()[
-									node
-										.loc
-										.start
-										.line - 1
-								];
+							const line = sourceCode.getLines()[
+								node
+									.loc
+									.start
+									.line - 1
+							];
 							const baseIndentMatch = line.match(/^\s*/);
 							const baseIndent = baseIndentMatch
 								? baseIndentMatch[0]

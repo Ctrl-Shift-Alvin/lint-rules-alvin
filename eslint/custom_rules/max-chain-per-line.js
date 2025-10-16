@@ -21,6 +21,10 @@ export const maxChainPerLineRule = {
 					enforceSingleLine: {
 						type: 'boolean',
 						default: false
+					},
+					checkSingleLink: {
+						type: 'boolean',
+						default: false
 					}
 				},
 				additionalProperties: false
@@ -34,9 +38,11 @@ export const maxChainPerLineRule = {
 	create(context) {
 
 		const {
-			maxChain = 2, enforceSingleLine = false
+			maxChain = 2,
+			enforceSingleLine = false,
+			checkSingleLink = false
 		} = context.options[0] || {};
-		const sourceCode = context.getSourceCode();
+		const sourceCode = context.sourceCode;
 		const processedChains = new Set();
 
 		/**
@@ -123,7 +129,10 @@ export const maxChainPerLineRule = {
 			const links = getChainLinks(outermostNode);
 			const chainCount = links.length;
 
-			if (chainCount <= 1) {
+			const minChain = checkSingleLink
+				? 1
+				: 2;
+			if (chainCount < minChain) {
 
 				return;
 

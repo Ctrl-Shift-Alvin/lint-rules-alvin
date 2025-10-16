@@ -5,6 +5,7 @@ import { jsxNoSingleObjectCurlyNewlineRule } from '../custom_rules/jsx-no-single
 import { maxChainPerLineRule } from '../custom_rules/max-chain-per-line.js';
 import { multilineParenNewlineRule } from '../custom_rules/multiline-paren-newline.js';
 import { multilineArrayAccessorNewlineRule } from '../custom_rules/multiline-array-accessor-newline.js';
+import { destructureNewlineRule } from '../custom_rules/destructure-newline.js';
 
 /**
  * Provides a config that creates a plugin and configures custom rules.
@@ -21,7 +22,8 @@ export const custom = {
 				'jsx-no-single-object-curly-newline': jsxNoSingleObjectCurlyNewlineRule,
 				'max-chain-per-line': maxChainPerLineRule,
 				'multiline-paren-newline': multilineParenNewlineRule,
-				'multiline-array-accessor-newline': multilineArrayAccessorNewlineRule
+				'multiline-array-accessor-newline': multilineArrayAccessorNewlineRule,
+				'destructure-newline': destructureNewlineRule
 			}
 		}
 	},
@@ -37,13 +39,18 @@ export const custom = {
 			'error',
 			{
 				maxChain: 2,
-				enforceSingleLine: true
+				enforceSingleLine: true,
+				checkSingleLink: true
 			}
 		],
 		'custom/multiline-paren-newline': [
 			'error',
 			{ singleArgument: true }
 		],
-		'custom/multiline-array-accessor-newline': 'error'
+		'custom/multiline-array-accessor-newline': 'error',
+		'custom/destructure-newline': [
+			'error',
+			{ minItems: 2 }
+		]
 	}
 };
