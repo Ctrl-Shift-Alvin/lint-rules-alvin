@@ -33,9 +33,7 @@ export const newlineBetweenImportsRule = {
 		return {
 			ImportDeclaration(node) {
 
-				const specifiers = node
-					.specifiers
-					.filter((specifier) => specifier.type === 'ImportSpecifier');
+				const specifiers = node.specifiers.filter((specifier) => specifier.type === 'ImportSpecifier');
 
 				if (specifiers.length < minItems) {
 
@@ -51,7 +49,15 @@ export const newlineBetweenImportsRule = {
 					const lastTokenOfCurrent = sourceCode.getLastToken(currentSpecifier);
 					const firstTokenOfNext = sourceCode.getFirstToken(nextSpecifier);
 
-					if (lastTokenOfCurrent.loc.end.line === firstTokenOfNext.loc.start.line) {
+					if (
+						lastTokenOfCurrent
+							.loc
+							.end
+							.line === firstTokenOfNext
+							.loc
+							.start
+							.line
+					) {
 
 						context.report({
 							node: nextSpecifier,

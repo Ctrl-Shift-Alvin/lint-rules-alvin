@@ -20,9 +20,7 @@ export const unnamedImportsLastRule = {
 			'Program:exit'(program) {
 
 				const sourceCode = context.sourceCode;
-				const allImports = program
-					.body
-					.filter((node) => node.type === 'ImportDeclaration');
+				const allImports = program.body.filter((node) => node.type === 'ImportDeclaration');
 
 				if (allImports.length < 2) {
 

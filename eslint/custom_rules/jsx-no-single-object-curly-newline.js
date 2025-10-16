@@ -31,7 +31,15 @@ export const jsxNoSingleObjectCurlyNewlineRule = {
 				}
 
 				// If the expression itself isn't multiline, there are no newlines to collapse.
-				if (expression.loc.start.line === expression.loc.end.line) {
+				if (
+					expression
+						.loc
+						.start
+						.line === expression
+						.loc
+						.end
+						.line
+				) {
 
 					return;
 
@@ -42,8 +50,20 @@ export const jsxNoSingleObjectCurlyNewlineRule = {
 				const firstTokenInExpression = sourceCode.getFirstToken(expression);
 				const lastTokenInExpression = sourceCode.getLastToken(expression);
 
-				const hasNewlineBefore = openingBrace.loc.end.line < firstTokenInExpression.loc.start.line;
-				const hasNewlineAfter = lastTokenInExpression.loc.end.line < closingBrace.loc.start.line;
+				const hasNewlineBefore = openingBrace
+					.loc
+					.end
+					.line < firstTokenInExpression
+					.loc
+					.start
+					.line;
+				const hasNewlineAfter = lastTokenInExpression
+					.loc
+					.end
+					.line < closingBrace
+					.loc
+					.start
+					.line;
 
 				if (hasNewlineBefore || hasNewlineAfter) {
 

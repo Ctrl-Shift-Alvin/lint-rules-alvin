@@ -20,7 +20,13 @@ export const jsxMultilinePropNewlineRule = {
 
 		function isMultiline(node) {
 
-			return node && node.loc && node.loc.start.line < node.loc.end.line;
+			return node && node.loc && node
+				.loc
+				.start
+				.line < node
+				.loc
+				.end
+				.line;
 
 		}
 
@@ -63,7 +69,16 @@ export const jsxMultilinePropNewlineRule = {
 				const firstProp = node.attributes[0];
 
 				// Check if the tag name and the first prop are on the same line.
-				if (node.name.loc.end.line === firstProp.loc.start.line) {
+				if (
+					node
+						.name
+						.loc
+						.end
+						.line === firstProp
+						.loc
+						.start
+						.line
+				) {
 
 					context.report({
 						node: firstProp,
@@ -72,8 +87,12 @@ export const jsxMultilinePropNewlineRule = {
 
 							// Get indentation of the line with the opening tag.
 							const line = sourceCode
-								.getLines()
-								[node.loc.start.line - 1];
+								.getLines()[
+									node
+										.loc
+										.start
+										.line - 1
+								];
 							const baseIndentMatch = line.match(/^\s*/);
 							const baseIndent = baseIndentMatch
 								? baseIndentMatch[0]

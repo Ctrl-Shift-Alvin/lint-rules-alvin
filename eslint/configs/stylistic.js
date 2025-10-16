@@ -1,3 +1,4 @@
+// eslint-disable-next-line import-x/no-deprecated, import-x/namespace, import-x/default
 import eslintPluginStylistic from '@stylistic/eslint-plugin';
 
 /**
@@ -314,6 +315,7 @@ export const stylistic = {
 			'all',
 			{
 				ignoreJSX: 'multi-line',
+				nestedBinaryExpressions: false,
 				ignoredNodes: [
 
 					// Arrow function ternaries
