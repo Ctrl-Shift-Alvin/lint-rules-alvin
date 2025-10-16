@@ -470,7 +470,7 @@ export const typescript = {
 		'@typescript-eslint/strict-boolean-expressions': [
 			'error',
 			{
-				allowAny: false,
+				allowAny: true,
 				allowNullableBoolean: false,
 				allowNullableEnum: false,
 				allowNullableNumber: true,
