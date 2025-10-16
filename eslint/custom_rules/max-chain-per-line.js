@@ -58,6 +58,7 @@ export const maxChainPerLineRule = {
 				if (
 					(parent.type === 'MemberExpression' && parent.object === outermostNode)
 					|| (parent.type === 'CallExpression' && parent.callee === outermostNode)
+					|| (parent.type === 'TSNonNullExpression' && parent.expression === outermostNode)
 				) {
 
 					outermostNode = parent;
@@ -86,12 +87,22 @@ export const maxChainPerLineRule = {
 			const links = [];
 			let currentNode = node;
 
-			while (currentNode.type === 'MemberExpression' || currentNode.type === 'CallExpression') {
+			while (
+				currentNode.type === 'MemberExpression'
+				|| currentNode.type === 'CallExpression'
+				|| currentNode.type === 'TSNonNullExpression'
+			) {
 
 				if (currentNode.type === 'CallExpression') {
 
 					// A call is part of the preceding link, so we just traverse through it.
 					currentNode = currentNode.callee;
+					continue;
+
+				} else if (currentNode.type === 'TSNonNullExpression') {
+
+					// A non-null assertion is part of the preceding link, so we just traverse through it.
+					currentNode = currentNode.expression;
 					continue;
 
 				}
