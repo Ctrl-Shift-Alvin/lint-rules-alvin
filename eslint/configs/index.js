@@ -7,4 +7,5 @@ export { json } from './json.js';
 export { markdown } from './markdown.js';
 export { reactHooks } from './reactHooks.js';
 export { stylistic } from './stylistic.js';
+export { sveltekit } from './sveltekit.js';
 export { typescript } from './typescript.js';

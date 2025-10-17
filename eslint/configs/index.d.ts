@@ -9,4 +9,5 @@ export declare const json: Linter.Config[];
 export declare const markdown: Linter.Config;
 export declare const reactHooks: Linter.Config;
 export declare const stylistic: Linter.Config;
+export declare const sveltekit: Linter.Config[];
 export declare const typescript: Linter.Config;
