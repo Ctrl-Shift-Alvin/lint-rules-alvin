@@ -13,19 +13,16 @@
   "author": "Alvin Raul Szőke",
   "type": "module",
   "exports": {
-    "./eslint": {
-      "import": "./eslint/presets/index.js",
-      "types": "./eslint/presets/index.d.ts"
-    },
-    "./eslint/configs": "./eslint/configs/index.js",
+    "./eslint/presets/astroReactTs": "./eslint/presets/astroReactTs.js",
+    "./eslint/presets/sveltekitTs": "./eslint/presets/sveltekitTs.js",
     "./eslint/configs/astro": "./eslint/configs/astro.js",
-    "./eslint/configs/astro_ts": "./eslint/configs/astro_ts.js",
+    "./eslint/configs/astro_ts": "./eslint/configs/astroTs.js",
     "./eslint/configs/base": "./eslint/configs/base.js",
-    "./eslint/configs/import_x": "./eslint/configs/import_x.js",
-    "./eslint/configs/import_x_ts": "./eslint/configs/import_x_ts.js",
+    "./eslint/configs/import_x": "./eslint/configs/importX.js",
+    "./eslint/configs/import_x_ts": "./eslint/configs/importXTs.js",
     "./eslint/configs/json": "./eslint/configs/json.js",
     "./eslint/configs/markdown": "./eslint/configs/markdown.js",
-    "./eslint/configs/react_hooks": "./eslint/configs/react_hooks.js",
+    "./eslint/configs/react_hooks": "./eslint/configs/reactHooks.js",
     "./eslint/configs/stylistic": "./eslint/configs/stylistic.js",
     "./eslint/configs/typescript": "./eslint/configs/typescript.js"
   },
