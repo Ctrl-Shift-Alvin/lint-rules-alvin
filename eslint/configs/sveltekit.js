@@ -17,9 +17,9 @@ export const sveltekit = [
 
 			// Svelte-specific
 			'svelte/infinite-reactive-loop': 'warn',
-			'svelte/no-dom-manupulating': 'warn',
+			'svelte/no-dom-manipulating': 'warn',
 			'svelte/no-dupe-else-if-blocks': 'error',
-			'svelte/no-dupe-else-on-directives': 'error',
+			'svelte/no-dupe-on-directives': 'error',
 			'svelte/no-dupe-style-properties': 'error',
 			'svelte/no-dupe-use-directives': 'error',
 			'svelte/no-not-function-handler': 'error',
@@ -63,19 +63,19 @@ export const sveltekit = [
 			'svelte/no-reactive-literals': 'error',
 			'svelte/no-svelte-internal': 'error',
 			'svelte/no-unnecessary-state-wrap': 'error',
-			'svelte/no-unused-class-name': 'error',
+			'svelte/no-unused-class-name': 'off', // TailwindCSS doesn't work with this rule apparently
 			'svelte/no-unused-props': 'error',
 			'svelte/no-unused-svelte-ignore': 'error',
 			'svelte/no-useless-children-snippet': 'error',
 			'svelte/no-useless-mustaches': 'error',
 			'prefer-const': 'off',
 			'svelte/prefer-const': 'error',
-			'svelte/prefer-destructed-store-props': 'error',
+			'svelte/prefer-destructured-store-props': 'error',
 			'svelte/prefer-writable-derived': 'error',
 			'svelte/require-each-key': 'error',
 			'svelte/require-event-dispatcher-types': 'error',
 			'svelte/require-optimized-style-attribute': 'error',
-			'svelte/require-store-init': 'error',
+			'svelte/require-stores-init': 'error',
 			'svelte/valid-each-key': 'error',
 
 			// Stylistic

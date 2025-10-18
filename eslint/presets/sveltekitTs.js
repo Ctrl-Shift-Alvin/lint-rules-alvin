@@ -14,12 +14,17 @@ import {
  */
 export const sveltekitTs = defineConfig(
 	base,
-	sveltekit,
 	typescript,
+	sveltekit,
 	{
 		...eslintPluginImportX.configs['flat/typescript'],
 		...importX
 	},
 	stylistic,
-	custom
+	custom,
+	{
+		name: 'sveltekit-override',
+		files: [ '**/*.svelte' ],
+		rules: { 'import-x/unambiguous': 'off' }
+	}
 );
