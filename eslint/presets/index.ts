@@ -1,2 +1,2 @@
-export { astroReactTs } from './astroReactTs';
-export { sveltekitTs } from './sveltekitTs';
+export { astroReact } from './astroReact';
+export { sveltekitTs } from './sveltekit';

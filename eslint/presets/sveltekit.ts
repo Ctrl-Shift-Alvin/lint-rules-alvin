@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { defineConfig } from 'eslint/config';
 import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
-import { Linter } from 'eslint';
 import {
 	base,
 	importX,
@@ -14,16 +15,15 @@ import {
  * The `ESLint` PocketBase/SvelteKit config with typescript.
  */
 export const sveltekitTs = defineConfig(
-	base,
-	typescript,
-	sveltekit,
+	base as any,
+	typescript as any,
+	sveltekit as any,
 	{
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-		...eslintPluginImportX.configs['flat/typescript'] as Linter.Config,
+		...eslintPluginImportX.configs['flat/typescript'],
 		...importX
-	},
-	stylistic,
-	custom,
+	} as any,
+	stylistic as any,
+	custom as any,
 	{
 		name: 'sveltekit-override',
 		files: [ '**/*.svelte' ],

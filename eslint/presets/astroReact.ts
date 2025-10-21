@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import {
 	defineConfig,
 	globalIgnores
 } from 'eslint/config';
 import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
-import { Linter } from 'eslint';
 import {
 	base,
 	custom,
@@ -11,25 +12,24 @@ import {
 	typescript,
 	reactHooks,
 	stylistic,
-	importXTs
+	importX
 } from '../configs/index';
 
 /**
  * The `ESLint` Astro/React config with typescript.
  */
-export const astroReactTs = defineConfig(
+export const astroReact = defineConfig(
 	globalIgnores([ '**/*.astro/*.ts' ]), // Crucial to drastically improve performance!
-	base,
-	typescript,
-	astro,
+	base as any,
+	typescript as any,
+	astro as any,
 	{
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-		...eslintPluginImportX.configs['flat/react'] as Linter.Config,
-		...importXTs
-	},
-	reactHooks,
-	stylistic,
-	custom,
+		...eslintPluginImportX.configs['flat/react'],
+		...importX
+	} as any,
+	reactHooks as any,
+	stylistic as any,
+	custom as any,
 	{
 		name: 'eslint-plugin-astro-stylistic-override',
 		files: [ '**/*.astro' ],
