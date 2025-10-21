@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmit": false,
+    "outDir": "./build/test",
+    "rootDir": ".",
+    "emitDeclarationOnly": false,
+    "declaration": false,
+    "sourceMap": false,
+		"jsx": "preserve"
+  },
+  "include": [
+    "test/**/*.ts",
+    "eslint/custom_rules/**/*.ts"
+  ]
+}

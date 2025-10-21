@@ -3,6 +3,7 @@ import {
 	globalIgnores
 } from 'eslint/config';
 import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
+import { Linter } from 'eslint';
 import {
 	base,
 	custom,
@@ -11,7 +12,7 @@ import {
 	reactHooks,
 	stylistic,
 	importXTs
-} from '../configs/index.js';
+} from '../configs/index';
 
 /**
  * The `ESLint` Astro/React config with typescript.
@@ -22,7 +23,8 @@ export const astroReactTs = defineConfig(
 	typescript,
 	astro,
 	{
-		...eslintPluginImportX.configs['flat/react'],
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+		...eslintPluginImportX.configs['flat/react'] as Linter.Config,
 		...importXTs
 	},
 	reactHooks,

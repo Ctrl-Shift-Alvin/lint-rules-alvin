@@ -1,13 +1,13 @@
+import { TSESLint } from '@typescript-eslint/utils';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 
 /**
  * The ESLint `stylistic` config. Extends `configs.recommended` and overrides all rules.
- *
- * @type {import('eslint').Linter.Config[]}
  */
-export const sveltekit = [
+export const sveltekit: TSESLint.FlatConfig.ConfigArray = [
 	...eslintPluginSvelte.configs['flat/base'],
 	{
+		name: 'sveltekit-config',
 		files: [
 			'**/*.svelte',
 			'**/*.svelte.ts',
@@ -117,10 +117,7 @@ export const sveltekit = [
 					}
 				}
 			],
-			'svelte/html-self-closing': [
-				'error',
-				'default'
-			],
+			'svelte/html-self-closing': 'error', // leave it on 'default'
 			'indent': 'off', // eslint-disable-line @stylistic/quote-props
 			'@stylistic/indent': 'off',
 			'svelte/indent': [

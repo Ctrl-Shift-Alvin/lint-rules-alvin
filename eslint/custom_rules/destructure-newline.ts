@@ -1,14 +1,12 @@
-/**
- * @type {import('eslint').Rule.RuleModule}
- */
-export const destructureNewlineRule = {
+import {
+	AST_NODE_TYPES,
+	ESLintUtils
+} from '@typescript-eslint/utils';
+
+export const destructureNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 	meta: {
 		type: 'layout',
-		docs: {
-			description: 'Enforce newlines between properties in destructuring assignments',
-			category: 'Stylistic Issues',
-			recommended: false
-		},
+		docs: { description: 'Enforce newlines between properties in destructuring assignments' },
 		fixable: 'whitespace',
 		schema: [
 			{
@@ -24,16 +22,16 @@ export const destructureNewlineRule = {
 		],
 		messages: { error: 'There should be a newline between destructuring properties.' }
 	},
-
-	create(context) {
+	defaultOptions: [ { minItems: 2 } ],
+	create(context, options) {
 
 		const sourceCode = context.sourceCode;
-		const { minItems = 2 } = context.options[0] || {};
+		const { minItems } = options[0];
 
 		return {
 			VariableDeclarator(node) {
 
-				if (node.id.type !== 'ObjectPattern') {
+				if (node.id.type !== AST_NODE_TYPES.ObjectPattern) {
 
 					return;
 
@@ -53,6 +51,13 @@ export const destructureNewlineRule = {
 
 					const lastTokenOfCurrent = sourceCode.getLastToken(currentProperty);
 					const firstTokenOfNext = sourceCode.getFirstToken(nextProperty);
+
+					// Token not found
+					if (!lastTokenOfCurrent || !firstTokenOfNext) {
+
+						continue;
+
+					}
 
 					if (
 						lastTokenOfCurrent
@@ -85,4 +90,4 @@ export const destructureNewlineRule = {
 		};
 
 	}
-};
+});

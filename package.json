@@ -30,8 +30,14 @@
     "@eslint/compat": "^1.4.0",
     "@eslint/js": "^9.37.0",
     "@stylistic/eslint-plugin": "^5.4.0",
-    "@typescript-eslint/eslint-plugin": "^8.46.0",
-    "@typescript-eslint/parser": "^8.46.0",
+    "@types/eslint-plugin-markdown": "^2.0.2",
+    "@types/estree": "^1.0.8",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.8.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.1",
+    "@typescript-eslint/parser": "^8.46.1",
+    "@typescript-eslint/rule-tester": "^8.46.1",
+    "@typescript-eslint/utils": "^8.46.1",
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.37.0",
     "eslint-import-resolver-typescript": "^4.4.4",
@@ -42,6 +48,8 @@
     "eslint-plugin-react-hooks": "^7.0.0",
     "eslint-plugin-svelte": "^3.12.4",
     "globals": "^16.4.0",
+    "jiti": "^2.6.1",
+    "mocha": "^11.7.4",
     "svelte": "^5.40.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.1"
@@ -50,6 +58,12 @@
     "@eslint/compat": "^1.4.0",
     "@eslint/js": "^9.37.0",
     "@stylistic/eslint-plugin": "^5.4.0",
+    "@types/eslint-plugin-markdown": "^2.0.2",
+    "@types/estree": "^1.0.8",
+    "@types/node": "^24.8.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.0",
+    "@typescript-eslint/parser": "^8.46.0",
+    "@typescript-eslint/utils": "^8.46.1",
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.37.0",
     "eslint-import-resolver-typescript": "^4.4.4",
@@ -61,8 +75,9 @@
     "eslint-plugin-svelte": "^3.12.4",
     "globals": "^16.4.0",
     "svelte": "^5.40.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.0"
+    "typescript-eslint": "^8.46.1"
   },
   "peerDependenciesMeta": {
     "@eslint/compat": {
@@ -74,10 +89,28 @@
     "@stylistic/eslint-plugin": {
       "optional": true
     },
-    "eslint": {
+    "@types/eslint-plugin-markdown": {
+      "optional": true
+    },
+    "@types/estree": {
+      "optional": true
+    },
+    "@types/node": {
+      "optional": true
+    },
+    "@typescript-eslint/eslint-plugin": {
+      "optional": true
+    },
+    "@typescript-eslint/parser": {
+      "optional": true
+    },
+    "@typescript-eslint/utils": {
       "optional": true
     },
     "astro-eslint-parser": {
+      "optional": true
+    },
+    "eslint": {
       "optional": true
     },
     "eslint-import-resolver-typescript": {
@@ -110,14 +143,12 @@
     "typescript": {
       "optional": true
     },
-    "@typescript-eslint/eslint-plugin": {
-      "optional": true
-    },
-    "@typescript-eslint/parser": {
-      "optional": true
-    },
     "typescript-eslint": {
       "optional": true
     }
+  },
+  "scripts": {
+    "test": "npm run test:eslint",
+    "test:eslint": "node --no-warnings --import ./test/eslint/test-bootstrap.mjs ./node_modules/mocha/bin/mocha --extensions ts --recursive \"test/**/*.test.ts\""
   }
 }

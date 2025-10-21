@@ -1,13 +1,23 @@
+import { TSESLint } from '@typescript-eslint/utils';
 import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
 
 /**
  * The ESLint import config. Configures all rules.
- *
- * @type {import('eslint').Linter.Config}
  */
-export const importX = {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+export const importX: TSESLint.FlatConfig.Config = {
 	name: 'eslint-plugin-import-x',
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 	plugins: { 'import-x': eslintPluginImportX },
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+	...eslintPluginImportX.flatConfigs.typescript,
+	settings: {
+		'import-x/resolver': {
+			typescript: true,
+			node: true
+		}
+	},
 	rules: {
 		'import-x/export': 'error',
 		'import-x/no-deprecated': 'error',

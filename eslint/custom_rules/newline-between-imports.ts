@@ -1,14 +1,12 @@
-/**
- * @type {import('eslint').Rule.RuleModule}
- */
-export const newlineBetweenImportsRule = {
+import {
+	AST_NODE_TYPES,
+	ESLintUtils
+} from '@typescript-eslint/utils';
+
+export const newlineBetweenImportsRule = ESLintUtils.RuleCreator.withoutDocs({
 	meta: {
 		type: 'layout',
-		docs: {
-			description: 'Enforce newlines between import specifiers',
-			category: 'Stylistic Issues',
-			recommended: false
-		},
+		docs: { description: 'Enforce newlines between import specifiers' },
 		fixable: 'whitespace',
 		schema: [
 			{
@@ -24,16 +22,17 @@ export const newlineBetweenImportsRule = {
 		],
 		messages: { error: 'There should be a newline between import specifiers.' }
 	},
-
-	create(context) {
+	defaultOptions: [ { minItems: 2 } ],
+	create(context, options) {
 
 		const sourceCode = context.sourceCode;
-		const { minItems = 2 } = context.options[0] || {};
+
+		const { minItems } = options[0];
 
 		return {
 			ImportDeclaration(node) {
 
-				const specifiers = node.specifiers.filter((specifier) => specifier.type === 'ImportSpecifier');
+				const specifiers = node.specifiers.filter((specifier) => specifier.type === AST_NODE_TYPES.ImportSpecifier);
 
 				if (specifiers.length < minItems) {
 
@@ -48,6 +47,9 @@ export const newlineBetweenImportsRule = {
 
 					const lastTokenOfCurrent = sourceCode.getLastToken(currentSpecifier);
 					const firstTokenOfNext = sourceCode.getFirstToken(nextSpecifier);
+
+					if (!lastTokenOfCurrent || !firstTokenOfNext)
+						continue;
 
 					if (
 						lastTokenOfCurrent
@@ -80,4 +82,4 @@ export const newlineBetweenImportsRule = {
 		};
 
 	}
-};
+});

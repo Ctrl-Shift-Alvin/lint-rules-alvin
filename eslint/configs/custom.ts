@@ -1,17 +1,16 @@
-import { newlineBetweenImportsRule } from '../custom_rules/newline-between-imports.js';
-import { unnamedImportsLastRule } from '../custom_rules/unnamed-imports-last.js';
-import { jsxMultilinePropNewlineRule } from '../custom_rules/jsx-multiline-prop-newline.js';
-import { maxChainPerLineRule } from '../custom_rules/max-chain-per-line.js';
-import { multilineParenNewlineRule } from '../custom_rules/multiline-paren-newline.js';
-import { multilineArrayAccessorNewlineRule } from '../custom_rules/multiline-array-accessor-newline.js';
-import { destructureNewlineRule } from '../custom_rules/destructure-newline.js';
+import { TSESLint } from '@typescript-eslint/utils';
+import { newlineBetweenImportsRule } from '../custom_rules/newline-between-imports';
+import { unnamedImportsLastRule } from '../custom_rules/unnamed-imports-last';
+import { jsxMultilinePropNewlineRule } from '../custom_rules/jsx-multiline-prop-newline';
+import { maxChainPerLineRule } from '../custom_rules/max-chain-per-line';
+import { multilineParenNewlineRule } from '../custom_rules/multiline-paren-newline';
+import { multilineArrayAccessorNewlineRule } from '../custom_rules/multiline-array-accessor-newline';
+import { destructureNewlineRule } from '../custom_rules/destructure-newline';
 
 /**
  * Provides a config that creates a plugin and configures custom rules.
- *
- * @type {import('eslint').Linter.Config}
  */
-export const custom = {
+export const custom: TSESLint.FlatConfig.Config = {
 	plugins: {
 		custom: {
 			rules: {
@@ -42,8 +41,7 @@ export const custom = {
 			'error',
 			{
 				maxChain: 2,
-				enforceSingleLine: true,
-				checkSingleLink: true
+				enforceSingleLine: true
 			}
 		],
 		'custom/multiline-paren-newline': [

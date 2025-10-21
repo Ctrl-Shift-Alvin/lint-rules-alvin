@@ -1,12 +1,10 @@
-// eslint-disable-next-line import-x/no-deprecated, import-x/namespace, import-x/default
 import eslintPluginStylistic from '@stylistic/eslint-plugin';
+import { TSESLint } from '@typescript-eslint/utils';
 
 /**
  * The ESLint `stylistic` config. Extends `configs.recommended` and overrides all rules.
- *
- * @type {import('eslint').Linter.Config}
  */
-export const stylistic = {
+export const stylistic: TSESLint.FlatConfig.Config = {
 	name: 'eslint-plugin-stylistic',
 	...eslintPluginStylistic.configs.recommended,
 	plugins: { '@stylistic': eslintPluginStylistic },

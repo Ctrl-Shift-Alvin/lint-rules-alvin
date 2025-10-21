@@ -1,45 +1,63 @@
-/**
- * @type {import('eslint').Rule.RuleModule}
- */
-export const multilineParenNewlineRule = {
+import {
+	AST_NODE_TYPES,
+	ESLintUtils,
+	TSESLint,
+	TSESTree
+} from '@typescript-eslint/utils';
+
+export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 	meta: {
 		type: 'layout',
-		docs: {
-			description: 'Require newlines inside parentheses that are multiline',
-			category: 'Stylistic Issues',
-			recommended: false
-		},
+		docs: { description: 'Require newlines inside parentheses that are multiline' },
 		fixable: 'whitespace',
 		schema: [
 			{
 				type: 'object',
-				properties: {
-					singleArgument: {
-						type: 'boolean',
-						default: false
-					}
-				},
+				properties: { singleArgument: { type: 'boolean' } },
 				additionalProperties: false
 			}
 		],
 		messages: {
-			expectedNewlineAfterParen: 'Expected a newline after \'(\'.',
-			expectedNewlineBeforeParen: 'Expected a newline before \')\'.'
+			expandAfter: 'Expected a newline after \'(\'.',
+			expandBefore: 'Expected a newline before \')\'.',
+			collapseAfterSingleArgument: 'Unexpected newline after \'(\' for single object/array argument.',
+			collapseBeforeSingleArgument: 'Unexpected newline before \')\' for single object/array argument.'
 		}
 	},
-
-	create(context) {
+	defaultOptions: [ { singleArgument: false } ],
+	create(context, options) {
 
 		const sourceCode = context.sourceCode;
-		const options = context.options[0] || {};
-		const allowSingleArgumentOnSameLine = options.singleArgument === true;
+		const { singleArgument } = options[0];
 
-		/**
-		 * @param {import('estree').CallExpression | import('estree').NewExpression} node
-		 */
-		function checkCall(node) {
+		function collapseWhitespacePreservingEdges(start: number, end: number) {
+
+			const between = sourceCode.text.slice(
+				start,
+				end
+			);
+
+			if (!(/[\r\n]/u).test(between))
+				return between;
+
+			if (between.trim() !== '')
+				return null;
+
+			const leadingMatch = (/^[^\S\r\n]*/u).exec(between);
+			const trailingMatch = (/[^\S\r\n]*$/u).exec(between);
+			const leading = leadingMatch?.[0] ?? '';
+			const trailing = trailingMatch?.[0] ?? '';
+
+			return `${leading}${trailing}`;
+
+		}
+
+		function checkCall(
+			node: TSESTree.CallExpression | TSESTree.NewExpression
+		): TSESLint.RuleFunction<TSESTree.Expression> | undefined {
 
 			const callee = node.callee;
+
 			const openParen = sourceCode.getTokenAfter(
 				callee,
 				{ filter: (t) => t.value === '(' }
@@ -53,7 +71,7 @@ export const multilineParenNewlineRule = {
 
 			const closeParen = sourceCode.getLastToken(node);
 
-			if (closeParen.value !== ')') {
+			if (closeParen?.value !== ')') {
 
 				return;
 
@@ -75,18 +93,18 @@ export const multilineParenNewlineRule = {
 			}
 
 			// Handle the singleArgument exception
-			if (
-				allowSingleArgumentOnSameLine
-				&& node.arguments.length === 1
-			) {
+			if (singleArgument && node.arguments.length === 1) {
 
 				const arg = node.arguments[0];
-				const isObjectOrArray = arg.type === 'ObjectExpression' || arg.type === 'ArrayExpression';
+				const isObjectOrArray
+					= arg.type === AST_NODE_TYPES.ObjectExpression
+						|| arg.type === AST_NODE_TYPES.ArrayExpression;
 
 				if (isObjectOrArray) {
 
-					// For this exception, we *disallow* newlines between parens and the single argument.
 					const firstTokenOfArg = sourceCode.getFirstToken(arg);
+					if (!firstTokenOfArg)
+						return;
 					if (
 						openParen
 							.loc
@@ -99,16 +117,35 @@ export const multilineParenNewlineRule = {
 
 						context.report({
 							node: openParen,
-							message: 'Unexpected newline after \'(\' for single object/array argument.',
-							fix: (fixer) => fixer.removeRange([
-								openParen.range[1],
-								firstTokenOfArg.range[0]
-							])
+							messageId: 'collapseAfterSingleArgument',
+							fix(fixer) {
+
+								const start = openParen.range[1];
+								const end = firstTokenOfArg.range[0];
+								const replacement = collapseWhitespacePreservingEdges(
+									start,
+									end
+								);
+
+								if (replacement === null)
+									return null;
+
+								return fixer.replaceTextRange(
+									[
+										start,
+										end
+									],
+									replacement
+								);
+
+							}
 						});
 
 					}
 
 					const lastTokenOfArg = sourceCode.getLastToken(arg);
+					if (!lastTokenOfArg)
+						return;
 					if (
 						lastTokenOfArg
 							.loc
@@ -121,11 +158,28 @@ export const multilineParenNewlineRule = {
 
 						context.report({
 							node: closeParen,
-							message: 'Unexpected newline before \')\' for single object/array argument.',
-							fix: (fixer) => fixer.removeRange([
-								lastTokenOfArg.range[1],
-								closeParen.range[0]
-							])
+							messageId: 'collapseBeforeSingleArgument',
+							fix(fixer) {
+
+								const start = lastTokenOfArg.range[1];
+								const end = closeParen.range[0];
+								const replacement = collapseWhitespacePreservingEdges(
+									start,
+									end
+								);
+
+								if (replacement === null)
+									return null;
+
+								return fixer.replaceTextRange(
+									[
+										start,
+										end
+									],
+									replacement
+								);
+
+							}
 						});
 
 					}
@@ -138,11 +192,15 @@ export const multilineParenNewlineRule = {
 
 			// Check for a newline after the opening parenthesis.
 			const firstArg = node.arguments[0];
+
+			/* eslint-disable-next-line
+			@typescript-eslint/no-unnecessary-condition,
+			@typescript-eslint/strict-boolean-expressions */
 			if (firstArg) {
 
 				const firstTokenOfFirstArg = sourceCode.getFirstToken(firstArg);
 				if (
-					openParen
+					firstTokenOfFirstArg && openParen
 						.loc
 						.end
 						.line === firstTokenOfFirstArg
@@ -153,7 +211,7 @@ export const multilineParenNewlineRule = {
 
 					context.report({
 						node: openParen,
-						messageId: 'expectedNewlineAfterParen',
+						messageId: 'expandAfter',
 						fix: (fixer) => fixer.insertTextAfter(
 							openParen,
 							'\n'
@@ -166,11 +224,15 @@ export const multilineParenNewlineRule = {
 
 			// Check for a newline before the closing parenthesis.
 			const lastArg = node.arguments[node.arguments.length - 1];
+
+			/* eslint-disable-next-line
+			@typescript-eslint/no-unnecessary-condition,
+			@typescript-eslint/strict-boolean-expressions */
 			if (lastArg) {
 
 				const lastTokenOfLastArg = sourceCode.getLastToken(lastArg);
 				if (
-					lastTokenOfLastArg
+					lastTokenOfLastArg && lastTokenOfLastArg
 						.loc
 						.end
 						.line === closeParen
@@ -181,7 +243,7 @@ export const multilineParenNewlineRule = {
 
 					context.report({
 						node: closeParen,
-						messageId: 'expectedNewlineBeforeParen',
+						messageId: 'expandBefore',
 						fix: (fixer) => fixer.insertTextBefore(
 							closeParen,
 							'\n'
@@ -194,14 +256,21 @@ export const multilineParenNewlineRule = {
 
 		}
 
-		/**
-		 * @param {import('estree').Expression} node
-		 */
-		function checkGeneric(node) {
+		function checkGeneric(
+			node: TSESTree.ChainExpression
+				| TSESTree.LogicalExpression
+				| TSESTree.BinaryExpression
+				| TSESTree.ConditionalExpression
+				| TSESTree.MemberExpression
+				| TSESTree.UnaryExpression
+				| TSESTree.UpdateExpression
+				| TSESTree.ArrowFunctionExpression
+				| TSESTree.AwaitExpression
+				| TSESTree.YieldExpression
+		): TSESLint.RuleFunction<TSESTree.Expression> | undefined {
 
-			// To prevent double-checking, if this node is the callee of a call, skip it.
 			if (
-				(node.parent.type === 'CallExpression' || node.parent.type === 'NewExpression')
+				(node.parent.type === AST_NODE_TYPES.CallExpression || node.parent.type === AST_NODE_TYPES.NewExpression)
 				&& node.parent.callee === node
 			) {
 
@@ -210,7 +279,7 @@ export const multilineParenNewlineRule = {
 			}
 
 			const openParen = sourceCode.getTokenBefore(node);
-			if (!openParen || openParen.value !== '(') {
+			if (openParen?.value !== '(') {
 
 				return;
 
@@ -218,7 +287,7 @@ export const multilineParenNewlineRule = {
 
 			// Find matching closing paren
 			let parenLevel = 1;
-			let closeParen = null;
+			let closeParen: TSESTree.Token | null = null;
 			const tokensAfter = sourceCode.getTokensAfter(openParen);
 			for (const token of tokensAfter) {
 
@@ -241,8 +310,8 @@ export const multilineParenNewlineRule = {
 			if (!closeParen)
 				return;
 
-			// Check if the parens wrap the node. The last token of the node should be followed by the close paren.
-			if (sourceCode.getTokenAfter(sourceCode.getLastToken(node)) !== closeParen) {
+			const maybeLastTokenOfNode = sourceCode.getLastToken(node);
+			if (!maybeLastTokenOfNode || sourceCode.getTokenAfter(maybeLastTokenOfNode) !== closeParen) {
 
 				return;
 
@@ -262,10 +331,9 @@ export const multilineParenNewlineRule = {
 
 			}
 
-			// Check for a newline after the opening parenthesis.
 			const firstTokenOfNode = sourceCode.getFirstToken(node);
 			if (
-				openParen
+				firstTokenOfNode && openParen
 					.loc
 					.end
 					.line === firstTokenOfNode
@@ -276,7 +344,7 @@ export const multilineParenNewlineRule = {
 
 				context.report({
 					node: openParen,
-					messageId: 'expectedNewlineAfterParen',
+					messageId: 'expandAfter',
 					fix: (fixer) => fixer.insertTextAfter(
 						openParen,
 						'\n'
@@ -285,10 +353,9 @@ export const multilineParenNewlineRule = {
 
 			}
 
-			// Check for a newline before the closing parenthesis.
 			const lastTokenOfNode = sourceCode.getLastToken(node);
 			if (
-				lastTokenOfNode
+				lastTokenOfNode && lastTokenOfNode
 					.loc
 					.end
 					.line === closeParen
@@ -298,9 +365,8 @@ export const multilineParenNewlineRule = {
 			) {
 
 				context.report({
-
 					node: closeParen,
-					messageId: 'expectedNewlineBeforeParen',
+					messageId: 'expandBefore',
 					fix: (fixer) => fixer.insertTextBefore(
 						closeParen,
 						'\n'
@@ -327,5 +393,4 @@ export const multilineParenNewlineRule = {
 		};
 
 	}
-};
-
+});

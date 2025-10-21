@@ -1,14 +1,13 @@
 import eslintTs from '@typescript-eslint/eslint-plugin';
 import eslintTsParser from '@typescript-eslint/parser';
+import { TSESLint } from '@typescript-eslint/utils';
 
 /**
  * The ESLint `typescript` config. Extends `configs.base`,
  * enables `languageOptions.parserOptions.projectService` and configures all rules,
  * only for `ts`, `tsx`, `mts` and `cts` files.
- *
- * @type {import('eslint').Linter.Config}
  */
-export const typescript = {
+export const typescript: TSESLint.FlatConfig.Config = {
 	name: 'typescript',
 	files: [
 		'**/*.ts',
@@ -16,7 +15,8 @@ export const typescript = {
 		'**/*.mts',
 		'**/*.cts'
 	],
-	...eslintTs.configs['flat/base'],
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+	...eslintTs.configs['flat/base'] as TSESLint.FlatConfig.Config,
 	languageOptions: {
 		parser: eslintTsParser,
 		parserOptions: { projectService: true },

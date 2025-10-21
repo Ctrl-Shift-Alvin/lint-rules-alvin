@@ -1,11 +1,10 @@
+import { TSESLint } from '@typescript-eslint/utils';
 import eslintPluginAstro from 'eslint-plugin-astro';
 
 /**
  * The ESLint Astro config. Extends `configs['flat/base']` and configures all rules.
- *
- * @type {import('eslint').Linter.Config}
  */
-export const astro = [
+export const astro: TSESLint.FlatConfig.ConfigArray = [
 	...eslintPluginAstro.configs['flat/base'],
 	{
 		name: 'eslint-plugin-astro',
