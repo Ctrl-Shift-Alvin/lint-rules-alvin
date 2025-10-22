@@ -1,5 +1,6 @@
 import { TSESLint } from '@typescript-eslint/utils';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
+import tsEslintParser from '@typescript-eslint/parser';
 
 /**
  * The ESLint `stylistic` config. Extends `configs.recommended` and overrides all rules.
@@ -13,6 +14,13 @@ export const sveltekit: TSESLint.FlatConfig.ConfigArray = [
 			'**/*.svelte.ts',
 			'**/*.svelte.js'
 		],
+		languageOptions: {
+			parserOptions: {
+				parser: tsEslintParser,
+				projectService: true,
+				extraFileExtensions: [ '.svelte' ]
+			}
+		},
 		rules: {
 
 			// Svelte-specific

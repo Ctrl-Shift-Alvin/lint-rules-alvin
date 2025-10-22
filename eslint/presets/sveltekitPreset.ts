@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { defineConfig } from 'eslint/config';
 import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
+import { Linter } from 'eslint/universal';
 import {
 	base,
 	importX,
@@ -12,18 +13,19 @@ import {
 } from '../configs/index';
 
 /**
- * The `ESLint` PocketBase/SvelteKit config with typescript.
+ * The `ESLint` PocketBase/SvelteKit config.
  */
-export const sveltekitTs = defineConfig(
+export const sveltekitPreset = defineConfig(
 	base as any,
-	typescript as any,
-	sveltekit as any,
+	typescript as Linter.Config,
+	sveltekit as Linter.Config[],
 	{
 		...eslintPluginImportX.configs['flat/typescript'],
 		...importX
-	} as any,
-	stylistic as any,
-	custom as any,
+
+	} as Linter.Config,
+	stylistic as Linter.Config,
+	custom as Linter.Config,
 	{
 		name: 'sveltekit-override',
 		files: [ '**/*.svelte' ],

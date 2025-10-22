@@ -1,2 +1,2 @@
-export { astroReact } from './astroReact';
-export { sveltekitTs } from './sveltekit';
+export { astroReactPreset } from './astroReactPreset';
+export { sveltekitPreset } from './sveltekitPreset';

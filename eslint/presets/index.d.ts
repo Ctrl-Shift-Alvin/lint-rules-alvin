@@ -1,3 +1,3 @@
 import type { TSESLint } from '@typescript-eslint/utils';
-export const astroReact: TSESLint.FlatConfig.ConfigArray;
-export const sveltekitTs: TSESLint.FlatConfig.ConfigArray;
+export const astroReactPreset: TSESLint.FlatConfig.ConfigArray;
+export const sveltekitPreset: TSESLint.FlatConfig.ConfigArray;
