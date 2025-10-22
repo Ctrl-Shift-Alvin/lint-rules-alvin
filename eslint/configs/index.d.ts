@@ -1,0 +1,11 @@
+import type { TSESLint } from '@typescript-eslint/utils';
+export const astro: TSESLint.FlatConfig.ConfigArray;
+export const base: TSESLint.FlatConfig.ConfigArray;
+export const custom: TSESLint.FlatConfig.Config;
+export const importX: TSESLint.FlatConfig.Config;
+export const json: TSESLint.FlatConfig.ConfigArray;
+export const markdown: TSESLint.FlatConfig.Config;
+export const reactHooks: TSESLint.FlatConfig.Config;
+export const stylistic: TSESLint.FlatConfig.Config;
+export const sveltekit: TSESLint.FlatConfig.ConfigArray;
+export const typescript: TSESLint.FlatConfig.Config;
