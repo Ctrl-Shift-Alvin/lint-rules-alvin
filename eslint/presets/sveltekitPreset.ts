@@ -29,6 +29,9 @@ export const sveltekitPreset = defineConfig(
 	{
 		name: 'sveltekit-override',
 		files: [ '**/*.svelte' ],
-		rules: { 'import-x/unambiguous': 'off' }
+		rules: {
+			'import-x/unambiguous': 'off',
+			'import-x/no-mutable-exports': 'off'
+		}
 	}
 );
