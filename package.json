@@ -1,6 +1,6 @@
 {
   "name": "lint-rules-alvin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "My own personal linting ruleset for a bunch of different plugins. Includes a few custom rules. Used in a few of my repos.",
   "keywords": [
     "eslint"
@@ -15,13 +15,13 @@
   "types": "eslint/index.d.ts",
   "exports": {
     "./eslint/presets": {
-			"import": "./eslint/presets/index.ts",
-			"types": "./eslint/presets/index.d.ts"
-		},
+      "import": "./eslint/presets/index.ts",
+      "types": "./eslint/presets/index.d.ts"
+    },
     "./eslint/configs": {
-			"import": "./eslint/configs/index.ts",
-			"types": "./eslint/configs/index.d.ts"
-		}
+      "import": "./eslint/configs/index.ts",
+      "types": "./eslint/configs/index.d.ts"
+    }
   },
   "devDependencies": {
     "@eslint/compat": "^1.4.0",
