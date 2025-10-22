@@ -3,14 +3,12 @@
 import { defineConfig } from 'eslint/config';
 import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
 import { Linter } from 'eslint/universal';
-import {
-	base,
-	importX,
-	sveltekit,
-	stylistic,
-	custom,
-	typescript
-} from '../configs/index';
+import { base } from '../configs/base';
+import { importX } from '../configs/importX';
+import { sveltekit } from '../configs/sveltekit';
+import { stylistic } from '../configs/stylistic';
+import { custom } from '../configs/custom';
+import { typescript } from '../configs/typescript';
 
 /**
  * The `ESLint` PocketBase/SvelteKit config.

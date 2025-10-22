@@ -5,15 +5,13 @@ import {
 	globalIgnores
 } from 'eslint/config';
 import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
-import {
-	base,
-	custom,
-	astro,
-	typescript,
-	reactHooks,
-	stylistic,
-	importX
-} from '../configs/index';
+import { base } from '../configs/base';
+import { custom } from '../configs/custom';
+import { astro } from '../configs/astro';
+import { typescript } from '../configs/typescript';
+import { reactHooks } from '../configs/reactHooks';
+import { stylistic } from '../configs/stylistic';
+import { importX } from '../configs/importX';
 
 /**
  * The `ESLint` Astro/React config with typescript.
