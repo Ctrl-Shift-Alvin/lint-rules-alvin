@@ -14,13 +14,13 @@
   "type": "module",
   "types": "eslint/index.d.ts",
   "exports": {
-    "./eslint/presets": {
-      "import": "./eslint/presets/index.ts",
-      "types": "./eslint/presets/index.d.ts"
+    "./eslint/configs/*": {
+      "import": "./eslint/configs/*.ts",
+      "types": "./eslint/configs/*.d.ts"
     },
-    "./eslint/configs": {
-      "import": "./eslint/configs/index.ts",
-      "types": "./eslint/configs/index.d.ts"
+    "./eslint/presets/*": {
+      "import": "./eslint/presets/*.ts",
+      "types": "./eslint/presets/*.d.ts"
     }
   },
   "devDependencies": {
