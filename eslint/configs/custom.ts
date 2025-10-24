@@ -46,7 +46,10 @@ export const custom: TSESLint.FlatConfig.Config = {
 		],
 		'custom/multiline-paren-newline': [
 			'error',
-			{ singleArgument: true }
+			{
+				singleArgument: true,
+				enforceSingleLine: true
+			}
 		],
 		'custom/multiline-array-accessor-newline': 'error',
 		'custom/destructure-newline': [

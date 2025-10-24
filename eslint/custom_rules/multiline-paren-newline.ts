@@ -13,22 +13,35 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 		schema: [
 			{
 				type: 'object',
-				properties: { singleArgument: { type: 'boolean' } },
+				properties: {
+					singleArgument: { type: 'boolean' },
+					enforceSingleLine: { type: 'boolean' }
+				},
 				additionalProperties: false
 			}
 		],
 		messages: {
 			expandAfter: 'Expected a newline after \'(\'.',
 			expandBefore: 'Expected a newline before \')\'.',
+			collapseAfter: 'Unexpected newline after \'(\'.',
+			collapseBefore: 'Unexpected newline before \')\'.',
 			collapseAfterSingleArgument: 'Unexpected newline after \'(\' for single object/array argument.',
 			collapseBeforeSingleArgument: 'Unexpected newline before \')\' for single object/array argument.'
 		}
 	},
-	defaultOptions: [ { singleArgument: false } ],
+	defaultOptions: [
+		{
+			singleArgument: false,
+			enforceSingleLine: false
+		}
+	],
 	create(context, options) {
 
 		const sourceCode = context.sourceCode;
-		const { singleArgument } = options[0];
+		const {
+			singleArgument,
+			enforceSingleLine
+		} = options[0];
 
 		function collapseWhitespacePreservingEdges(start: number, end: number) {
 
@@ -190,15 +203,147 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 
 			}
 
-			// Check for a newline after the opening parenthesis.
+			// Determine if the content inside the parentheses is single-line
 			const firstArg = node.arguments[0];
+			const lastArg = node.arguments[node.arguments.length - 1];
+			let firstTokenOfFirstArg: TSESTree.Token | null = null;
+			let lastTokenOfLastArg: TSESTree.Token | null = null;
 
 			/* eslint-disable-next-line
 			@typescript-eslint/no-unnecessary-condition,
 			@typescript-eslint/strict-boolean-expressions */
 			if (firstArg) {
 
-				const firstTokenOfFirstArg = sourceCode.getFirstToken(firstArg);
+				firstTokenOfFirstArg = sourceCode.getFirstToken(firstArg);
+
+			}
+
+			/* eslint-disable-next-line
+			@typescript-eslint/no-unnecessary-condition,
+			@typescript-eslint/strict-boolean-expressions */
+			if (lastArg) {
+
+				lastTokenOfLastArg = sourceCode.getLastToken(lastArg);
+
+			}
+			const contentIsSingleLine = node.arguments.length === 0
+				? true
+				: Boolean(
+					firstTokenOfFirstArg && lastTokenOfLastArg
+					&& firstTokenOfFirstArg
+						.loc
+						.start
+						.line === lastTokenOfLastArg
+						.loc
+						.end
+						.line
+				);
+
+			if (enforceSingleLine && contentIsSingleLine) {
+
+				// Collapse newline after '('
+				const afterStart = openParen.range[1];
+				const afterEnd = node.arguments.length === 0
+					? closeParen.range[0]
+					: firstTokenOfFirstArg?.range[0] ?? openParen.range[1];
+				const openEndLine = openParen
+					.loc
+					.end
+					.line;
+				const firstInnerStartLine = firstTokenOfFirstArg
+					? firstTokenOfFirstArg
+						.loc
+						.start
+						.line
+					: closeParen
+						.loc
+						.start
+						.line;
+				const hasNewlineAfter = openEndLine < firstInnerStartLine;
+				if (hasNewlineAfter) {
+
+					context.report({
+						node: openParen,
+						messageId: 'collapseAfter',
+						fix(fixer) {
+
+							const replacement = collapseWhitespacePreservingEdges(
+								afterStart,
+								afterEnd
+							);
+							if (replacement === null)
+								return null;
+							return fixer.replaceTextRange(
+								[
+									afterStart,
+									afterEnd
+								],
+								replacement
+							);
+
+						}
+					});
+
+				}
+
+				// Collapse newline before ')'
+				const beforeStart = node.arguments.length === 0
+					? openParen.range[1]
+					: lastTokenOfLastArg?.range[1] ?? closeParen.range[0];
+				const beforeEnd = closeParen.range[0];
+				const refLine = node.arguments.length === 0
+					? openParen
+						.loc
+						.end
+						.line
+					: lastTokenOfLastArg
+						?.loc
+						.end
+						.line ?? closeParen
+						.loc
+						.start
+						.line;
+				const closeStartLine = closeParen
+					.loc
+					.start
+					.line;
+				const hasNewlineBefore = refLine < closeStartLine;
+				if (hasNewlineBefore) {
+
+					context.report({
+						node: closeParen,
+						messageId: 'collapseBefore',
+						fix(fixer) {
+
+							const replacement = collapseWhitespacePreservingEdges(
+								beforeStart,
+								beforeEnd
+							);
+							if (replacement === null)
+								return null;
+							return fixer.replaceTextRange(
+								[
+									beforeStart,
+									beforeEnd
+								],
+								replacement
+							);
+
+						}
+					});
+
+				}
+
+				return;
+
+			}
+
+			// Check for a newline after the opening parenthesis.
+			/* eslint-disable-next-line
+			@typescript-eslint/no-unnecessary-condition,
+			@typescript-eslint/strict-boolean-expressions */
+			if (firstArg) {
+
 				if (
 					firstTokenOfFirstArg && openParen
 						.loc
@@ -223,14 +368,11 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 			}
 
 			// Check for a newline before the closing parenthesis.
-			const lastArg = node.arguments[node.arguments.length - 1];
-
 			/* eslint-disable-next-line
 			@typescript-eslint/no-unnecessary-condition,
 			@typescript-eslint/strict-boolean-expressions */
 			if (lastArg) {
 
-				const lastTokenOfLastArg = sourceCode.getLastToken(lastArg);
 				if (
 					lastTokenOfLastArg && lastTokenOfLastArg
 						.loc
@@ -332,6 +474,99 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 			}
 
 			const firstTokenOfNode = sourceCode.getFirstToken(node);
+			const lastTokenOfNode = sourceCode.getLastToken(node);
+
+			const contentIsSingleLine = Boolean(
+				firstTokenOfNode && lastTokenOfNode
+				&& firstTokenOfNode
+					.loc
+					.start
+					.line === lastTokenOfNode
+					.loc
+					.end
+					.line
+			);
+
+			if (enforceSingleLine && contentIsSingleLine && firstTokenOfNode && lastTokenOfNode) {
+
+				// Collapse newline after '('
+				if (
+					openParen
+						.loc
+						.end
+						.line < firstTokenOfNode
+						.loc
+						.start
+						.line
+				) {
+
+					const start = openParen.range[1];
+					const end = firstTokenOfNode.range[0];
+					context.report({
+						node: openParen,
+						messageId: 'collapseAfter',
+						fix(fixer) {
+
+							const replacement = collapseWhitespacePreservingEdges(
+								start,
+								end
+							);
+							if (replacement === null)
+								return null;
+							return fixer.replaceTextRange(
+								[
+									start,
+									end
+								],
+								replacement
+							);
+
+						}
+					});
+
+				}
+
+				// Collapse newline before ')'
+				if (
+					lastTokenOfNode
+						.loc
+						.end
+						.line < closeParen
+						.loc
+						.start
+						.line
+				) {
+
+					const start = lastTokenOfNode.range[1];
+					const end = closeParen.range[0];
+					context.report({
+						node: closeParen,
+						messageId: 'collapseBefore',
+						fix(fixer) {
+
+							const replacement = collapseWhitespacePreservingEdges(
+								start,
+								end
+							);
+							if (replacement === null)
+								return null;
+							return fixer.replaceTextRange(
+								[
+									start,
+									end
+								],
+								replacement
+							);
+
+						}
+					});
+
+				}
+
+				return;
+
+			}
+
 			if (
 				firstTokenOfNode && openParen
 					.loc
@@ -353,7 +588,6 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 
 			}
 
-			const lastTokenOfNode = sourceCode.getLastToken(node);
 			if (
 				lastTokenOfNode && lastTokenOfNode
 					.loc
