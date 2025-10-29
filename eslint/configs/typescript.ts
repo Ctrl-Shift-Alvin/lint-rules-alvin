@@ -426,7 +426,7 @@ export const typescript: TSESLint.FlatConfig.Config = {
 		'@typescript-eslint/no-unsafe-unary-minus': 'warn',
 		'@typescript-eslint/no-unused-expressions': 'warn',
 		'no-unused-vars': 'off',
-		'@typescript-eslint/no-unused-vars': 'warn',
+		'@typescript-eslint/no-unused-vars': 'off', // TS already shows these warnings
 		'no-use-before-define': 'off',
 		'@typescript-eslint/no-use-before-define': 'error',
 		'no-useless-constructor': 'off',
