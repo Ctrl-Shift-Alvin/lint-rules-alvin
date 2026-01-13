@@ -1,6 +1,6 @@
 {
   "name": "lint-rules-alvin",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "My own personal linting ruleset for a bunch of different plugins. Includes a few custom rules. Used in a few of my repos.",
   "keywords": [
     "eslint"
@@ -44,7 +44,7 @@
     "eslint-plugin-markdown": "^5.1.0",
     "eslint-plugin-react-hooks": "^7.0.0",
     "eslint-plugin-svelte": "^3.12.4",
-		"eslint-plugin-vue": "^10.6.2",
+    "eslint-plugin-vue": "^10.6.2",
     "globals": "^16.4.0",
     "jiti": "^2.6.1",
     "mocha": "^11.7.4",
@@ -71,7 +71,7 @@
     "eslint-plugin-markdown": "^5.1.0",
     "eslint-plugin-react-hooks": "^7.0.0",
     "eslint-plugin-svelte": "^3.12.4",
-		"eslint-plugin-vue": "^10.6.2",
+    "eslint-plugin-vue": "^10.6.2",
     "globals": "^16.4.0",
     "svelte": "^5.40.2",
     "ts-node": "^10.9.2",
@@ -133,9 +133,9 @@
     "eslint-plugin-svelte": {
       "optional": true
     },
-		"eslint-plugin-vue": {
-			"optional": true
-		},
+    "eslint-plugin-vue": {
+      "optional": true
+    },
     "globals": {
       "optional": true
     },
