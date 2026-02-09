@@ -35,7 +35,7 @@ export const stylistic: TSESLint.FlatConfig.Config = {
 		'@stylistic/arrow-spacing': [
 			'error',
 			{
-				before: true,
+				before: false,
 				after: true
 			}
 		],
