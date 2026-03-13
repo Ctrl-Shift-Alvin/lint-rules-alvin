@@ -179,19 +179,6 @@ export const stylistic: TSESLint.FlatConfig.Config = {
 			'error',
 			{ component: true }
 		],
-		'@stylistic/jsx-sort-props': [
-			'error',
-			{
-				ignoreCase: false,
-				callbacksLast: true,
-				shorthandFirst: true,
-				shorthandLast: false,
-				multiline: 'ignore',
-				noSortAlphabetically: true,
-				reservedFirst: true,
-				locale: 'en'
-			}
-		],
 		'@stylistic/jsx-tag-spacing': [
 			'error',
 			{

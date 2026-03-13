@@ -7,6 +7,7 @@ import { base } from '../configs/base';
 import { importX } from '../configs/importX';
 import { sveltekit } from '../configs/sveltekit';
 import { stylistic } from '../configs/stylistic';
+import { perfectionist } from '../configs/perfectionist';
 import { custom } from '../configs/custom';
 import { typescript } from '../configs/typescript';
 
@@ -23,6 +24,7 @@ export const sveltekitPreset = defineConfig(
 
 	} as Linter.Config,
 	stylistic as Linter.Config,
+	perfectionist as Linter.Config,
 	custom as Linter.Config,
 	{
 		name: 'sveltekit-override',

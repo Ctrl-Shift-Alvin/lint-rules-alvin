@@ -5,6 +5,7 @@ export const custom: TSESLint.FlatConfig.Config;
 export const importX: TSESLint.FlatConfig.Config;
 export const json: TSESLint.FlatConfig.ConfigArray;
 export const markdown: TSESLint.FlatConfig.Config;
+export const perfectionist: TSESLint.FlatConfig.Config;
 export const reactHooks: TSESLint.FlatConfig.Config;
 export const stylistic: TSESLint.FlatConfig.Config;
 export const sveltekit: TSESLint.FlatConfig.ConfigArray;

@@ -12,6 +12,7 @@ import { typescript } from '../configs/typescript';
 import { reactHooks } from '../configs/reactHooks';
 import { stylistic } from '../configs/stylistic';
 import { importX } from '../configs/importX';
+import { perfectionist } from '../configs/perfectionist';
 
 /**
  * The `ESLint` Astro/React config with typescript.
@@ -27,6 +28,7 @@ export const astroReactPreset = defineConfig(
 	} as any,
 	reactHooks as any,
 	stylistic as any,
+	perfectionist as any,
 	custom as any,
 	{
 		name: 'eslint-plugin-astro-stylistic-override',

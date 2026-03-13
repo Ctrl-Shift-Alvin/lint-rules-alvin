@@ -41,14 +41,15 @@
     "eslint-plugin-astro": "^1.6.0",
     "eslint-plugin-import-x": "^4.16.2",
     "eslint-plugin-jsonc": "^3.1.2",
+    "eslint-plugin-perfectionist": "^5.6.0",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-svelte": "^3.15.2",
     "eslint-plugin-vue": "^10.8.0",
     "globals": "^17.4.0",
     "jiti": "^2.6.1",
     "mocha": "^11.7.5",
-    "ts-node": "^10.9.2",
     "svelte": "^5.53.11",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.0"
   },
@@ -68,6 +69,7 @@
     "eslint-plugin-astro": "^1",
     "eslint-plugin-import-x": "^4",
     "eslint-plugin-jsonc": "^3",
+    "eslint-plugin-perfectionist": "^5",
     "eslint-plugin-react-hooks": "^7",
     "eslint-plugin-svelte": "^3",
     "eslint-plugin-vue": "^10",
@@ -117,6 +119,9 @@
       "optional": true
     },
     "eslint-plugin-jsonc": {
+      "optional": true
+    },
+    "eslint-plugin-perfectionist": {
       "optional": true
     },
     "eslint-plugin-react-hooks": {
