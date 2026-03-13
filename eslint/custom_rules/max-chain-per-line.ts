@@ -173,7 +173,7 @@ export const maxChainPerLineRule = ESLintUtils.RuleCreator.withoutDocs({
 					// Find the dot separator for this link.
 					const separatorToken = sourceCode.getTokenBefore(
 						linkNode.property,
-						{ filter: (token) => token.value === '.' || token.value === '?.' }
+						{ filter: (token)=> token.value === '.' || token.value === '?.' }
 					);
 
 					// If we couldn't find the separator token, bail out for safety.
@@ -199,7 +199,7 @@ export const maxChainPerLineRule = ESLintUtils.RuleCreator.withoutDocs({
 							node: linkNode.property,
 							loc: separatorToken.loc,
 							messageId: 'expand',
-							fix: (fixer) => fixer.insertTextBefore(
+							fix: (fixer)=> fixer.insertTextBefore(
 								separatorToken,
 								`\n${baseIndent}`
 							)
@@ -218,7 +218,7 @@ export const maxChainPerLineRule = ESLintUtils.RuleCreator.withoutDocs({
 					const previousNode = linkNode.object;
 					const separatorToken2 = sourceCode.getTokenBefore(
 						linkNode.property,
-						{ filter: (token) => token.value === '.' || token.value === '?.' }
+						{ filter: (token)=> token.value === '.' || token.value === '?.' }
 					);
 					if (!separatorToken2)
 						continue;
@@ -241,7 +241,7 @@ export const maxChainPerLineRule = ESLintUtils.RuleCreator.withoutDocs({
 								node: linkNode.property,
 								loc: separatorToken2.loc,
 								messageId: 'collapse',
-								fix: (fixer) => {
+								fix: (fixer)=> {
 
 									const between = sourceCode.text.slice(
 										from,
@@ -255,11 +255,9 @@ export const maxChainPerLineRule = ESLintUtils.RuleCreator.withoutDocs({
 
 									}
 
-									const segments = between.split(
-										/\r\n|\r|\n/
-									);
+									const segments = between.split(/\r\n|\r|\n/);
 
-									let collapsed = '';
+									let collapsed;
 
 									if (segments.length === 1) {
 

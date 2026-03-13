@@ -20,7 +20,7 @@ export const unnamedImportsLastRule = ESLintUtils.RuleCreator.withoutDocs({
 			'Program:exit'(program) {
 
 				const sourceCode = context.sourceCode;
-				const allImports = program.body.filter((node) => node.type === AST_NODE_TYPES.ImportDeclaration);
+				const allImports = program.body.filter((node)=> node.type === AST_NODE_TYPES.ImportDeclaration);
 
 				if (allImports.length < 2) {
 
@@ -28,8 +28,8 @@ export const unnamedImportsLastRule = ESLintUtils.RuleCreator.withoutDocs({
 
 				}
 
-				const regularImports = allImports.filter((node) => node.specifiers.length > 0);
-				const sideEffectImports = allImports.filter((node) => node.specifiers.length === 0);
+				const regularImports = allImports.filter((node)=> node.specifiers.length > 0);
+				const sideEffectImports = allImports.filter((node)=> node.specifiers.length === 0);
 
 				if (regularImports.length === 0 || sideEffectImports.length === 0) {
 
@@ -39,7 +39,7 @@ export const unnamedImportsLastRule = ESLintUtils.RuleCreator.withoutDocs({
 
 				const lastRegularImport = regularImports[regularImports.length - 1];
 
-				const misplacedImports = sideEffectImports.filter((node) => node.range[0] < lastRegularImport.range[0]);
+				const misplacedImports = sideEffectImports.filter((node)=> node.range[0] < lastRegularImport.range[0]);
 
 				if (misplacedImports.length === 0) {
 

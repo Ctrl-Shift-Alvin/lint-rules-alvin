@@ -4,14 +4,11 @@ import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
 /**
  * The ESLint import config. Configures all rules.
  */
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 export const importX: TSESLint.FlatConfig.Config = {
 	name: 'eslint-plugin-import-x',
-
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 	plugins: { 'import-x': eslintPluginImportX },
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 	...eslintPluginImportX.flatConfigs.typescript,
+	files: [ '**/*.{js,ts}' ],
 	settings: {
 		'import-x/resolver': {
 			typescript: true,

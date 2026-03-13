@@ -60,9 +60,8 @@ export const jsxMultilinePropNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 
 			// Only enforce for JSX props (attributes), not for children
 			/* eslint-disable-next-line
-			@typescript-eslint/no-unnecessary-condition,
-			@typescript-eslint/strict-boolean-expressions */
-			if (!node?.parent || node.parent.type !== AST_NODE_TYPES.JSXAttribute)
+			@typescript-eslint/no-unnecessary-condition */
+			if (node?.parent?.type !== AST_NODE_TYPES.JSXAttribute)
 				return;
 
 			const expr = node.expression;
@@ -113,7 +112,7 @@ export const jsxMultilinePropNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 					context.report({
 						node: openBrace,
 						messageId: 'collapse',
-						fix: (fixer) => fixer.removeRange([
+						fix: (fixer)=> fixer.removeRange([
 							openBrace.range[1],
 							firstTokenOfExpr.range[0]
 						])
@@ -133,7 +132,7 @@ export const jsxMultilinePropNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 					context.report({
 						node: closeBrace,
 						messageId: 'collapse',
-						fix: (fixer) => fixer.removeRange([
+						fix: (fixer)=> fixer.removeRange([
 							lastTokenOfExpr.range[1],
 							closeBrace.range[0]
 						])
@@ -160,7 +159,7 @@ export const jsxMultilinePropNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 					context.report({
 						node: openBrace,
 						messageId: 'expand',
-						fix: (fixer) => fixer.insertTextAfter(
+						fix: (fixer)=> fixer.insertTextAfter(
 							openBrace,
 							'\n'
 						)
@@ -180,7 +179,7 @@ export const jsxMultilinePropNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 					context.report({
 						node: closeBrace,
 						messageId: 'expand',
-						fix: (fixer) => fixer.insertTextBefore(
+						fix: (fixer)=> fixer.insertTextBefore(
 							closeBrace,
 							'\n'
 						)
@@ -207,7 +206,7 @@ export const jsxMultilinePropNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 					context.report({
 						node: openBrace,
 						messageId: 'collapse',
-						fix: (fixer) => fixer.removeRange([
+						fix: (fixer)=> fixer.removeRange([
 							openBrace.range[1],
 							firstTokenOfExpr.range[0]
 						])
@@ -227,7 +226,7 @@ export const jsxMultilinePropNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 					context.report({
 						node: closeBrace,
 						messageId: 'collapse',
-						fix: (fixer) => fixer.removeRange([
+						fix: (fixer)=> fixer.removeRange([
 							lastTokenOfExpr.range[1],
 							closeBrace.range[0]
 						])

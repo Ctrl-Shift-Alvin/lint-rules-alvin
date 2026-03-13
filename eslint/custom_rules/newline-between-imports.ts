@@ -32,7 +32,7 @@ export const newlineBetweenImportsRule = ESLintUtils.RuleCreator.withoutDocs({
 		return {
 			ImportDeclaration(node) {
 
-				const specifiers = node.specifiers.filter((specifier) => specifier.type === AST_NODE_TYPES.ImportSpecifier);
+				const specifiers = node.specifiers.filter((specifier)=> specifier.type === AST_NODE_TYPES.ImportSpecifier);
 
 				if (specifiers.length < minItems) {
 

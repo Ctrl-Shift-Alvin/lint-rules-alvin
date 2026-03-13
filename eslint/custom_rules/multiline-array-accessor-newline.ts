@@ -24,7 +24,7 @@ export const multilineArrayAccessorNewlineRule = ESLintUtils.RuleCreator.without
 
 			const openBracket = sourceCode.getTokenAfter(
 				node.object,
-				{ filter: (t) => t.value === '[' }
+				{ filter: (t)=> t.value === '[' }
 			);
 
 			if (!openBracket) {
@@ -199,7 +199,7 @@ export const multilineArrayAccessorNewlineRule = ESLintUtils.RuleCreator.without
 				context.report({
 					node: openBracket,
 					messageId: 'expandAfter',
-					fix: (fixer) => fixer.insertTextAfter(
+					fix: (fixer)=> fixer.insertTextAfter(
 						openBracket,
 						'\n'
 					)
@@ -221,7 +221,7 @@ export const multilineArrayAccessorNewlineRule = ESLintUtils.RuleCreator.without
 				context.report({
 					node: closeBracket,
 					messageId: 'expandBefore',
-					fix: (fixer) => fixer.insertTextBefore(
+					fix: (fixer)=> fixer.insertTextBefore(
 						closeBracket,
 						'\n'
 					)

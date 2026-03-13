@@ -73,7 +73,7 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 
 			const openParen = sourceCode.getTokenAfter(
 				callee,
-				{ filter: (t) => t.value === '(' }
+				{ filter: (t)=> t.value === '(' }
 			);
 
 			if (!openParen) { // e.g. `new Date`
@@ -229,12 +229,11 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 			const contentIsSingleLine = node.arguments.length === 0
 				? true
 				: Boolean(
-					firstTokenOfFirstArg && lastTokenOfLastArg
-					&& firstTokenOfFirstArg
+					firstTokenOfFirstArg && firstTokenOfFirstArg
 						.loc
 						.start
 						.line === lastTokenOfLastArg
-						.loc
+						?.loc
 						.end
 						.line
 				);
@@ -345,11 +344,11 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 			if (firstArg) {
 
 				if (
-					firstTokenOfFirstArg && openParen
+					openParen
 						.loc
 						.end
 						.line === firstTokenOfFirstArg
-						.loc
+						?.loc
 						.start
 						.line
 				) {
@@ -357,7 +356,7 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 					context.report({
 						node: openParen,
 						messageId: 'expandAfter',
-						fix: (fixer) => fixer.insertTextAfter(
+						fix: (fixer)=> fixer.insertTextAfter(
 							openParen,
 							'\n'
 						)
@@ -374,8 +373,8 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 			if (lastArg) {
 
 				if (
-					lastTokenOfLastArg && lastTokenOfLastArg
-						.loc
+					lastTokenOfLastArg
+						?.loc
 						.end
 						.line === closeParen
 						.loc
@@ -386,7 +385,7 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 					context.report({
 						node: closeParen,
 						messageId: 'expandBefore',
-						fix: (fixer) => fixer.insertTextBefore(
+						fix: (fixer)=> fixer.insertTextBefore(
 							closeParen,
 							'\n'
 						)
@@ -477,12 +476,11 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 			const lastTokenOfNode = sourceCode.getLastToken(node);
 
 			const contentIsSingleLine = Boolean(
-				firstTokenOfNode && lastTokenOfNode
-				&& firstTokenOfNode
+				firstTokenOfNode && firstTokenOfNode
 					.loc
 					.start
 					.line === lastTokenOfNode
-					.loc
+					?.loc
 					.end
 					.line
 			);
@@ -568,11 +566,11 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 			}
 
 			if (
-				firstTokenOfNode && openParen
+				openParen
 					.loc
 					.end
 					.line === firstTokenOfNode
-					.loc
+					?.loc
 					.start
 					.line
 			) {
@@ -580,7 +578,7 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 				context.report({
 					node: openParen,
 					messageId: 'expandAfter',
-					fix: (fixer) => fixer.insertTextAfter(
+					fix: (fixer)=> fixer.insertTextAfter(
 						openParen,
 						'\n'
 					)
@@ -589,8 +587,8 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 			}
 
 			if (
-				lastTokenOfNode && lastTokenOfNode
-					.loc
+				lastTokenOfNode
+					?.loc
 					.end
 					.line === closeParen
 					.loc
@@ -601,7 +599,7 @@ export const multilineParenNewlineRule = ESLintUtils.RuleCreator.withoutDocs({
 				context.report({
 					node: closeParen,
 					messageId: 'expandBefore',
-					fix: (fixer) => fixer.insertTextBefore(
+					fix: (fixer)=> fixer.insertTextBefore(
 						closeParen,
 						'\n'
 					)
