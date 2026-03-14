@@ -50,7 +50,7 @@ export const importX: TSESLint.FlatConfig.Config = {
 		'import-x/no-relative-parent-imports': 'off',
 		'import-x/no-restricted-paths': 'off', // Allow the user to override
 		'import-x/no-self-import': 'error',
-		'import-x/no-unresolved': 'error',
+		'import-x/no-unresolved': 'off', // Messes with some things, so make user override
 		'import-x/no-useless-path-segments': 'error',
 		'import-x/no-webpack-loader-syntax': 'error',
 

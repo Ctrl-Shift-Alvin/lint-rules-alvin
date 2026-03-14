@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { defineConfig } from 'eslint/config';
-import { importX as eslintPluginImportX } from 'eslint-plugin-import-x';
 import { Linter } from 'eslint/universal';
 import { base } from '../configs/base';
 import { importX } from '../configs/importX';
@@ -27,8 +26,7 @@ export const sveltekitPreset = defineConfig(
 		files: [ '**/*.svelte' ],
 		rules: {
 			'import-x/unambiguous': 'off',
-			'import-x/no-mutable-exports': 'off',
-			'import-x/no-unresolved': 'off'
+			'import-x/no-mutable-exports': 'off'
 		}
 	}
 );
