@@ -1,6 +1,5 @@
 import { TSESLint } from '@typescript-eslint/utils';
 import { newlineBetweenImportsRule } from '../custom_rules/newline-between-imports';
-import { unnamedImportsLastRule } from '../custom_rules/unnamed-imports-last';
 import { jsxMultilinePropNewlineRule } from '../custom_rules/jsx-multiline-prop-newline';
 import { maxChainPerLineRule } from '../custom_rules/max-chain-per-line';
 import { multilineParenNewlineRule } from '../custom_rules/multiline-paren-newline';
@@ -15,7 +14,6 @@ export const custom: TSESLint.FlatConfig.Config = {
 		custom: {
 			rules: {
 				'newline-between-imports': newlineBetweenImportsRule,
-				'unnamed-imports-last': unnamedImportsLastRule,
 				'jsx-multiline-prop-newline': jsxMultilinePropNewlineRule,
 				'max-chain-per-line': maxChainPerLineRule,
 				'multiline-paren-newline': multilineParenNewlineRule,
@@ -29,7 +27,6 @@ export const custom: TSESLint.FlatConfig.Config = {
 			'error',
 			{ minItems: 2 }
 		],
-		'custom/unnamed-imports-last': 'error',
 		'custom/jsx-multiline-prop-newline': [
 			'error',
 			{

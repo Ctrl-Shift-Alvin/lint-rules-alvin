@@ -466,7 +466,7 @@ export const typescript: TSESLint.FlatConfig.Config = {
 			'error',
 			'always'
 		],
-		'@typescript-eslint/sort-type-constituents': 'off', // Deprecated in favor of sort-intersection-types, etc.
+		'@typescript-eslint/sort-type-constituents': 'off', // Deprecated in favor of perfectionist/sort-intersection-types, etc.
 		'@typescript-eslint/strict-boolean-expressions': [
 			'error',
 			{
